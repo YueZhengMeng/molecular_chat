@@ -1,7 +1,7 @@
 # 首先导入所需第三方库
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.document_loaders import UnstructuredMarkdownLoader
-from langchain.document_loaders import PyPDFLoader # 新增代码
+from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
@@ -49,7 +49,7 @@ def get_text(dir_path):
 
 # 目标文件夹
 tar_dir = [
-    "/root/data/molecular"
+    "/root/data/demo/molecular"
 ]
 
 # 加载目标文件
@@ -67,7 +67,7 @@ embeddings = HuggingFaceEmbeddings(model_name="/root/data/model/sentence-transfo
 
 # 构建向量数据库
 # 定义持久化路径
-persist_directory = 'data_base/vector_db/chroma'
+persist_directory = 'data_base/vector_db/molecular'
 # 加载数据库
 vectordb = Chroma.from_documents(
     documents=split_docs,

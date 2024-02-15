@@ -1,6 +1,6 @@
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+# __import__('pysqlite3')
+# import sys
+# sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 # 以上三行代码用于解决OpenXLab平台可能出现的依赖版本问题
 from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
@@ -11,8 +11,7 @@ from langchain.chains import RetrievalQA
 from modelscope import snapshot_download, AutoModel, AutoTokenizer
 
 def init(): # 用于下载模型的函数，在实例化Model_center对象前执行
-    model_dir = snapshot_download('Shanghai_AI_Laboratory/internlm-chat-7b'
-                                  , cache_dir='./', revision='v1.0.3')
+    model_dir = snapshot_download('Shanghai_AI_Laboratory/internlm-chat-7b', cache_dir='./', revision='v1.0.3')
     os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
     # 下载模型
     os.system('huggingface-cli download --resume-download sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 --local-dir sentence-transformer')
@@ -23,7 +22,7 @@ def load_chain():
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformer")
 
     # 向量数据库持久化路径
-    persist_directory = 'data_base/vector_db/chroma'
+    persist_directory = 'data_base/vector_db/molecular'
 
     # 加载数据库
     vectordb = Chroma(
